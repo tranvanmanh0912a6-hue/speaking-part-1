@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luyện phản xạ Nói Tiếng Anh - Vấn đáp</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --green: #22c55e;
+      --green-hover: #16a34a;
+      --border: #334155;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 760px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    p.desc {
+      color: var(--text-sub);
+      font-size: 0.95rem;
+    }
+
+    .controls-top {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .voice-selector, .speed-selector {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .speed-selector {
+      background-color: #334155;
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .speed-selector input[type="range"] {
+      cursor: pointer;
+      accent-color: var(--accent);
+    }
+
+    select {
+      background-color: #334155;
+      color: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: #0f172a;
+    }
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background-color: #334155;
+      color: #f8fafc;
+    }
+    .btn-secondary:hover {
+      background-color: #475569;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      min-height: 26px;
+    }
+
+    .topic-tag {
+      font-size: 0.8rem;
+      color: var(--accent);
+      background-color: rgba(56, 189, 248, 0.1);
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-weight: 600;
+    }
+
+    .action-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .btn-audio {
+      background-color: var(--green);
+      color: #fff;
+    }
+    .btn-audio:hover {
+      background-color: var(--green-hover);
+    }
+
+    .content-box {
+      border-top: 1px dashed var(--border);
+      padding-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .q-text {
+      color: #f1f5f9;
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .a-box {
+      background-color: rgba(15, 23, 42, 0.6);
+      border-left: 3px solid var(--accent);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Luyện Phản Xạ Vấn Đáp (Speaking Part 1)</h1>
+      <p class="desc">Luyện nghe câu hỏi ngẫu nhiên và chuẩn bị câu trả lời trước khi bấm hiện văn bản.</p>
+    </header>
+
+    <div class="controls-top">
+      <div class="voice-selector">
+        <label for="voiceGender" style="color: var(--text-sub); font-size: 0.9rem; font-weight: 600;">Giọng:</label>
+        <select id="voiceGender">
+          <option value="female">Nữ (Female)</option>
+          <option value="male">Nam (Male)</option>
+        </select>
+      </div>
+
+      <div class="speed-selector">
+        <label for="voiceRate" style="color: var(--text-sub); font-size: 0.9rem; font-weight: 600;">Tốc độ:</label>
+        <input type="range" id="voiceRate" min="0.5" max="1.5" step="0.1" value="0.9" 
+               oninput="document.getElementById('rateVal').textContent = this.value + 'x'">
+        <span id="rateVal" style="font-size: 0.85rem; min-width: 35px; font-weight: 600; color: var(--accent);">0.9x</span>
+      </div>
+
+      <button class="btn-primary" onclick="generateRandomSession(4)">
+        🎲 Bắt đầu thi thử (Random 4 câu ngẫu nhiên)
+      </button>
+      <button class="btn-secondary" onclick="generateRandomSession(1)">
+        🔄 Random 1 câu
+      </button>
+      <button class="btn-secondary" onclick="loadAllQuestions()">
+        📋 Hiện tất cả câu hỏi
+      </button>
+    </div>
+
+    <div id="questions-list"></div>
+  </div>
+
+  <script>
+    const dataset = [
+      { topic: "Topic 1: Accommodation", q: "Now let's talk about accommodation.", a: "I live in a house in the countryside. It is quite a large and comfortable house." },
+      { topic: "Topic 1: Accommodation", q: "Tell us about where you live.", a: "I live in a house in the countryside. It is quite a large and comfortable house." },
+      { topic: "Topic 1: Accommodation", q: "Do you live in a house or an apartment?", a: "I live in a house in the countryside. It is quite a large and comfortable house." },
+      { topic: "Topic 1: Accommodation", q: "How long have you lived in your house or apartment?", a: "I have lived in my house for more than ten years. It is a quite large and comfortable house." },
+      { topic: "Topic 1: Accommodation", q: "Who do you live with?", a: "I live with my family. There are four people in my house: my parents, my younger sister, and me." },
+      { topic: "Topic 1: Accommodation", q: "What's your favourite room where you live?", a: "My favorite room is my bedroom because it is quiet and perfect for relaxing." },
+      { topic: "Topic 1: Accommodation", q: "Is there anything you don't like about where you live?", a: "In the countryside, I don't like the weather because there are often big storms in a year." },
+
+      { topic: "Topic 2: Accommodation (Future & Habits)", q: "What kind of place do you think you will live in in the future?", a: "I think I will live in the countryside because it is quiet and comfortable." },
+      { topic: "Topic 2: Accommodation (Future & Habits)", q: "Would you prefer to live in the city or the countryside?", a: "I like living in the countryside because it is quiet and comfortable." },
+      { topic: "Topic 2: Accommodation (Future & Habits)", q: "Do you have a garden?", a: "Yes, I have a small garden behind my house. I plant vegetables and flowers in it." },
+      { topic: "Topic 2: Accommodation (Future & Habits)", q: "Do you live on your own?", a: "No, I live with my family. There are four people in my house: my parents, my younger sister, and me." },
+      { topic: "Topic 2: Accommodation (Future & Habits)", q: "Is it better to live on your own or with other people?", a: "I think living with other people is better because it’s more fun and helpful." },
+      { topic: "Topic 2: Accommodation (Future & Habits)", q: "Which room do you spend most time in when you're at home?", a: "I spend the most time in my bedroom because I use it for studying, watching movies, and studying." },
+      { topic: "Topic 2: Accommodation (Future & Habits)", q: "Have you ever moved house?", a: "No, I have never moved house because I am very happy with my current house." },
+
+      { topic: "Topic 3: Hobbies and interests", q: "Now let's talk about hobbies and interests.", a: "My hobbies are listening to music and reading comics because that helps me relax after school." },
+      { topic: "Topic 3: Hobbies and interests", q: "Tell us about your hobbies and interests.", a: "My hobbies are listening to music and reading comics because that helps me relax after school." },
+      { topic: "Topic 3: Hobbies and interests", q: "Have you got any hobbies?", a: "My hobbies are listening to music and reading comics because that helps me relax after school." },
+      { topic: "Topic 3: Hobbies and interests", q: "Are there any hobbies you used to have that you don't do anymore?", a: "I used to like playing volleyball, but now I don’t have time to play." },
+      { topic: "Topic 3: Hobbies and interests", q: "Is there a hobby you would like to start?", a: "I want to start playing soccer because it is fun and good for my health." },
+      { topic: "Topic 3: Hobbies and interests", q: "What do you like to do at the weekend?", a: "On weekends, I play football with my friends because it is fun and good for my health." },
+      { topic: "Topic 3: Hobbies and interests", q: "What do you like to do to relax?", a: "I like to relax by listening to music and reading comics because they help me relax after school." },
+      { topic: "Topic 3: Hobbies and interests", q: "Do you like doing activities alone or with other people?", a: "I like doing activities with other people, because it is more fun and more helpful." },
+      { topic: "Topic 3: Hobbies and interests", q: "How often do you do exercise?", a: "I exercise about three times a week because it’s good for my health." },
+      { topic: "Topic 3: Hobbies and interests", q: "What are the most popular hobbies in your country?", a: "In my country, the most popular hobby is playing soccer because it's fun and good for your health." },
+      { topic: "Topic 3: Hobbies and interests", q: "Do any of your friends have an interesting hobby?", a: "Yes, my friend really likes taking photos. He usually takes photos in the park." },
+      { topic: "Topic 3: Hobbies and interests", q: "What do you do when you get home from your studies or work?", a: "When I come home, I like to watch movies and listen to music because they help me relax after school." },
+      { topic: "Topic 3: Hobbies and interests", q: "Are there any hobbies you wouldn't like to do?", a: "I like surfing and skydiving. But it is dangerous." },
+
+      { topic: "Topic 4: Celebrations", q: "Now let's talk about celebrations.", a: "The celebrations in my life are usually holidays. My family always gets together to eat and drink." },
+      { topic: "Topic 4: Celebrations", q: "Tell us about celebrations in your life.", a: "The celebrations in my life are usually holidays. My family always gets together to eat and drink." },
+      { topic: "Topic 4: Celebrations", q: "Do you like going to parties?", a: "I like going to parties because people get together and have a good time together." },
+      { topic: "Topic 4: Celebrations", q: "When was the last party you went to?", a: "I went to a friend's birthday party a few weeks ago. It was a normal gathering at a restaurant." },
+      { topic: "Topic 4: Celebrations", q: "What kind of things do people celebrate in your country?", a: "In my country, people celebrate many different events such as New Year's Eve, Christmas and weddings. It's all very interesting." },
+      { topic: "Topic 4: Celebrations", q: "Have you been to a wedding?", a: "I attended my brother's wedding reception. Everyone wore luxurious outfits, the most prominent being the bride and groom." },
+      { topic: "Topic 4: Celebrations", q: "What do you like to do at parties?", a: "At parties, I enjoy talking to people and trying different foods and drinks. I always have a good time.." },
+      { topic: "Topic 4: Celebrations", q: "What was your favourite party game as a child?", a: "My favorite party game is hide and seek. It is exciting and full of laughter." },
+      { topic: "Topic 4: Celebrations", q: "How often do you go to a party?", a: "I don't often go to parties because I don’t have a lot of free time" },
+      { topic: "Topic 4: Celebrations", q: "Do you like to dance when you're at a party?", a: "No, I don’t like dancing at parties. I just like chatting with friends or enjoying music." },
+      { topic: "Topic 4: Celebrations", q: "What's the best food to serve at a celebration?", a: "I think snacks are always a hit. Above all, it is very suitable for parties." },
+      { topic: "Topic 4: Celebrations", q: "Have you had a party in your house?", a: "Yes, my parents had a birthday party for me. It was a cozy meal." },
+      { topic: "Topic 4: Celebrations", q: "Which famous person would you most like to invite to a party?", a: "If I could, I would invite Cristiano Ronaldo. He is my idol." },
+
+      { topic: "Topic 5: Travel", q: "Now let's talk about travel.", a: "I like traveling because it lets me experience new foods and see beautiful places." },
+      { topic: "Topic 5: Travel", q: "Do you like to travel?", a: "I like traveling because it lets me experience new foods and see beautiful places." },
+      { topic: "Topic 5: Travel", q: "Have you ever lived in another country?", a: "I have never lived in another country. I would love to one day experience life in another culture." },
+      { topic: "Topic 5: Travel", q: "What do you like to do on holiday?", a: "On holiday I like to explore new places and try local dishes. That's very interesting." },
+      { topic: "Topic 5: Travel", q: "Do you prefer lying on the beach or sightseeing?", a: "I like to lie on the beach because it gives me a chance to relax." },
+      { topic: "Topic 5: Travel", q: "Which country would you most like to visit?", a: "I think I will visit Japan because I really like the culture and food there." },
+      { topic: "Topic 5: Travel", q: "Do you have many tourists where you live?", a: "Yes, I live in Quy Nhon city, there are a lot of tourists here because this is a famous tourist destination for the sea." },
+      { topic: "Topic 5: Travel", q: "What's the most interesting place you've ever visited?", a: "Quy Nhon city is the most interesting place I have ever visited. There is beautiful scenery and clean air." },
+      { topic: "Topic 5: Travel", q: "Do you like to buy souvenirs?", a: "No, I don't like buying souvenirs because they are expensive and don't last long." },
+      { topic: "Topic 5: Travel", q: "Are you going on holiday this year?", a: "Yes, I am planning to go to Quy Nhon this year. I'm really looking forward to it because I really like this coastal city." },
+      { topic: "Topic 5: Travel", q: "Do you like to travel on your own?", a: "No, I don't like traveling alone because it would be very sad and lonely." },
+      { topic: "Topic 5: Travel", q: "What's your favourite way of travelling?", a: "My favorite way to travel is by motorbike because it allows me to move freely to places I like." },
+
+      { topic: "Topic 6: Studying", q: "Tell us about studying.", a: "I like learning because it allows me to learn new things and improve my skills." },
+      { topic: "Topic 6: Studying", q: "Do you enjoy studying English?", a: "Yes, I like learning English because it helps me communicate with people from different countries and cultures." },
+      { topic: "Topic 6: Studying", q: "Have you got a favourite room to study in at home?", a: "My favorite study room at home is the bedroom because it's quiet and comfortable." },
+      { topic: "Topic 6: Studying", q: "What time of day is your best time for studying?", a: "The best time for me to study is in the evening. It's quiet and comfortable." },
+      { topic: "Topic 6: Studying", q: "Do you like to study online?", a: "No, I don't like study online because studying online for a long time makes my eyes tired." },
+      { topic: "Topic 6: Studying", q: "What are the advantages and disadvantages of studying online?", a: "Online learning is convenient and accessible. However, it can be distracting and have less personal interaction." },
+      { topic: "Topic 6: Studying", q: "What do you find most difficult about studying?", a: "I find concentration to be the most difficult part of studying. However, I can improve it." },
+      { topic: "Topic 6: Studying", q: "How often do you study English every week?", a: "I study English at least twice a week when I have free time. I want to maintain my level." },
+      { topic: "Topic 6: Studying", q: "Have you studied English in a class?", a: "Yes, I learned English in class. It was a great class." },
+      { topic: "Topic 6: Studying", q: "Have you tried studying with other people?", a: "I studied with other people. I find it useful for speaking practice and collaboration." },
+      { topic: "Topic 6: Studying", q: "Do you prefer studying alone or with other people?", a: "I like studying alone because it helps me focus better." },
+      { topic: "Topic 6: Studying", q: "Which area of English do you find most difficult?", a: "I think vocabulary is the most difficult area of English. It's hard to remember it all." },
+      { topic: "Topic 6: Studying", q: "Is the internet always useful for studying?", a: "The Internet can be a useful tool for learning. However, it can also be a source of distraction if not used wisely." },
+      { topic: "Topic 6: Studying", q: "Is there a subject you would like to study?", a: "I want to study math. Because it is my best subject." }
+    ];
+
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+
+        const rateEl = document.getElementById("voiceRate");
+        utterance.rate = rateEl ? parseFloat(rateEl.value) : 0.9;
+
+        const voices = window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('en'));
+        const genderEl = document.getElementById("voiceGender");
+        const gender = genderEl ? genderEl.value : 'female';
+
+        let selectedVoice = null;
+        if (gender === 'male') {
+          selectedVoice = voices.find(v => /male|david|mark|george|guy|daniel|james/i.test(v.name));
+        } else {
+  // Ưu tiên số 1: Giọng Google Dịch (Google US English)
+  selectedVoice = voices.find(v => /google us english/i.test(v.name))
+               || voices.find(v => /female|zira|jenny|samantha|victoria|karen|susan/i.test(v.name));
+}
+
+        if (selectedVoice) {
+          utterance.voice = selectedVoice;
+        } else if (voices.length > 0) {
+          utterance.voice = voices[0];
+        }
+
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert("Trình duyệt của bạn không hỗ trợ tính năng đọc âm thanh (Speech Synthesis).");
+      }
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+      };
+    }
+
+    function renderList(list) {
+      const container = document.getElementById("questions-list");
+      container.innerHTML = "";
+
+      list.forEach((item, index) => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+          <div class="card-header">
+            <span id="t-${index}" class="topic-tag hidden">${item.topic}</span>
+            <span style="color: var(--text-sub); font-size: 0.85rem; margin-left: auto;">Câu ${index + 1}</span>
+          </div>
+
+          <div class="action-row">
+            <button class="btn-audio" onclick="speakText('${escapeQuotes(item.q)}')">
+              🔊 Nghe câu hỏi
+            </button>
+            <button class="btn-secondary" onclick="toggleVisibility('t-${index}', this, '🏷️ Hiện chủ đề', 'Ẩn chủ đề')">
+              🏷️ Hiện chủ đề
+            </button>
+            <button class="btn-secondary" onclick="toggleVisibility('q-${index}', this, '👁️ Hiện câu hỏi', 'Ẩn câu hỏi')">
+              👁️ Hiện câu hỏi
+            </button>
+            <button class="btn-secondary" onclick="toggleVisibility('a-${index}', this, '📝 Hiện đáp án', 'Ẩn đáp án')">
+              📝 Hiện đáp án
+            </button>
+          </div>
+
+          <div class="content-box">
+            <div id="q-${index}" class="q-text hidden">❓ ${item.q}</div>
+            <div id="a-${index}" class="a-box hidden">💡 <b>Đáp án chuẩn:</b><br>${item.a}</div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function toggleVisibility(id, btn, showText, hideText) {
+      const el = document.getElementById(id);
+      if (el.classList.contains("hidden")) {
+        el.classList.remove("hidden");
+        btn.textContent = hideText;
+      } else {
+        el.classList.add("hidden");
+        btn.textContent = showText;
+      }
+    }
+
+    function escapeQuotes(str) {
+      return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    }
+
+    function generateRandomSession(count) {
+      const shuffled = [...dataset].sort(() => 0.5 - Math.random());
+      const selected = shuffled.slice(0, count);
+      renderList(selected);
+      if (selected.length > 0) {
+        setTimeout(() => speakText(selected[0].q), 300);
+      }
+    }
+
+    function loadAllQuestions() {
+      renderList(dataset);
+    }
+
+    window.onload = () => {
+      generateRandomSession(4);
+    };
+  </script>
+</body>
+</html>
